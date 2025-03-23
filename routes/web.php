@@ -31,8 +31,8 @@ Route::get('/watches', [WatchController::class, 'index'])->name('watches.index')
 Route::get('/watches/create', [WatchController::class, 'create'])->name('watches.create');
 Route::post('/watches', [WatchController::class, 'store'])->name('watches.store'); // Create a new product
 Route::get('/watches/{id}', [WatchController::class, 'show'])->name('watches.show'); // Show a specific watch
-Route::get('/watches/{id}/edit', [WatchController::class, 'edit'])->name('watches.edit')->middleware(adminUser::class); // Edit a product by ID
-Route::put('/watches/{id}', [WatchController::class, 'update'])->name('watches.update')->middleware(adminUser::class); // Update product by ID
+Route::get('/watches/{id}/edit', [WatchController::class, 'edit'])->name('watches.edit'); // Edit a product by ID
+Route::put('/watches/{id}', [WatchController::class, 'update'])->name('watches.update'); // Update product by ID
 Route::delete('/watches/{id}/destroy', [WatchController::class, 'destroy'])->name('watches.destroy')->middleware(adminUser::class); // Delete product by ID
 
 Route::get('/contact', function () {
