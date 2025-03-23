@@ -56,7 +56,8 @@
                 </div>
                 @endif
 
-                <form action="{{ route('contact.submit') }}" method="POST">
+                <form action="{{ route('contact.submit') }}" method="POST" enctype="multipart/form-data">
+                    
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>

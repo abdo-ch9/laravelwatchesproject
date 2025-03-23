@@ -20,28 +20,29 @@ class WatchController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255', // Ensure name is provided and is a string
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',  // Ensure price is provided and is a positive number
-            'stock' => 'required|integer|min:0',  // Ensure stock is a positive integer
-            'image' => 'nullable|image|max:2048', // Ensure image is a valid file if provided
-        ]);
+    { $request->validate([
+        'name' => 'required|string|max:255', // Ensure name is provided and is a string
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',  // Ensure price is provided and is a positive number
+        'stock' => 'required|integer|min:0',  // Ensure stock is a positive integer
+        'imageOne' => 'nullable|image|max:2048',
+        'imageTwo' => 'nullable|image|max:2048', // Ensure image is a valid file if provided
+        'imageTree' => 'nullable|image|max:2048',
+    ]);
 
-        // Handle the image upload
-        if ($request->hasFile('image')) {
-            
-            $imagePath = $request->file('image')->store('images', 'public'); 
-            $test =  Storage::url($imagePath); // Store the image in the public/images directory
-           // Store the image in the public/images directory
-        }
+    // Handle the image upload
+    if ($request->hasFile('image')) {
+        
+        $imagePath = $request->file('image')->store('images', 'public'); 
+        $test =  Storage::url($imagePath); // Store the image in the public/images directory
+       // Store the image in the public/images directory
+    }
 
-        // Create a new watch record
-        $watch = Watch::create(array_merge($request->all(), ['image' => $test ?? null]));
+    // Create a new watch record
+    $watch = Watch::create(array_merge($request->all(), ['image' => $test ?? null]));
 
-        // Redirect to the watches index page with a success message
-        return redirect()->route('watches.index')->with('success', 'Watch added successfully!');
+    // Redirect to the watches index page with a success message
+    return redirect()->route('watches.index')->with('success', 'Watch added successfully!');
     }
 
     public function show($id)
@@ -58,15 +59,10 @@ class WatchController extends Controller
 
     public function update(Request $request, $id)
     {
-        $watch = Watch::findOrFail($id);
-        $watch->update($request->all());
-        return redirect()->route('watches.index')->with('success', 'Watch updated successfully!');
-    }
-
-    public function destroy($id)
     {
         $watch = Watch::findOrFail($id);
         $watch->delete();
         return redirect()->route('watches.index')->with('success', 'Watch deleted successfully!');
     }
+}
 }

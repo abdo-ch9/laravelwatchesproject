@@ -28,7 +28,7 @@ Route::put('/orders/{id}', [OrderController::class, 'update'])->name('orders.upd
 Route::delete('/orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy')->middleware(islogged::class); // Delete a specific order
 
 Route::get('/watches', [WatchController::class, 'index'])->name('watches.index'); // List all watches
-Route::get('/watches/create', [WatchController::class, 'create'])->name('watches.create')->middleware(adminUser::class);
+Route::get('/watches/create', [WatchController::class, 'create'])->name('watches.create');
 Route::post('/watches', [WatchController::class, 'store'])->name('watches.store'); // Create a new product
 Route::get('/watches/{id}', [WatchController::class, 'show'])->name('watches.show'); // Show a specific watch
 Route::get('/watches/{id}/edit', [WatchController::class, 'edit'])->name('watches.edit')->middleware(adminUser::class); // Edit a product by ID
@@ -40,5 +40,5 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::post('/contact/submit', [ContatController::class, 'submit'])->name('contact.submit');
-URL::forceScheme("https");
+//URL::forceScheme("https");
 ?>
