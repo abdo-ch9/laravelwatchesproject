@@ -26,20 +26,35 @@ class WatchController extends Controller
         'price' => 'required|numeric|min:0',
         'stock' => 'required|integer|min:0',
         'imageOne' => 'nullable|image',
+        'imageTwo' => 'nullable|image',
+        'imageTree' => 'nullable|image',
+
     ]);
 
     $imageUrl = null;
 
     if ($request->hasFile('imageOne')) {
         $imagePath = $request->file('imageOne')->store('images', 'public');
-        $imageUrl = Storage::url($imagePath);
-        $fullPath = storage_path('app/public/' . $imagePath);
+        $imageUrlOne = Storage::url($imagePath);
+        $fullPath = storage_path('app/public/images' . $imagePath);
+    }
+    if ($request->hasFile('imageTwo')) {
+        $imagePath = $request->file('imageTwo')->store('images', 'public');
+        $imageUrlTwo = Storage::url($imagePath);
+        $fullPath = storage_path('app/public/images' . $imagePath);
+    }
+    if ($request->hasFile('imageTree')) {
+        $imagePath = $request->file('imageTree')->store('images', 'public');
+        $imageUrlTree = Storage::url($imagePath);
+        $fullPath = storage_path('app/public/images' . $imagePath);
     }
 
     // Create a new watch record
     $watch = Watch::create(array_merge(
         $request->only(['name', 'description', 'price', 'stock']),
-        ['imageOne' => $imageUrl]
+        ['imageOne' => $imageUrlOne ],
+        ['imageTwo' => $imageUrlTwo ],
+        ['imageTree' => $imageUrlTree ]
     ));
 
         // Redirect to the watches index page with a success message
@@ -76,7 +91,7 @@ class WatchController extends Controller
         if ($request->hasFile('imageOne')) {
             $imagePathOne = $request->file('imageOne')->store('images', 'public');
             $watch->image_one = Storage::url($imagePathOne);
-        }
+        
         if ($request->hasFile('imageTwo')) {
             $imagePathTwo = $request->file('imageTwo')->store('images', 'public');
             $watch->image_two = Storage::url($imagePathTwo);
@@ -92,12 +107,12 @@ class WatchController extends Controller
         // Redirect to the watches index page with a success message
         return redirect()->route('watches.index')->with('success', 'Watch updated successfully!');
     }
-
+    }
     public function destroy(Request $request, $id)
-    { {
+    {
             $watch = Watch::findOrFail($id);
             $watch->delete();
             return redirect()->route('watches.index')->with('success', 'Watch deleted successfully!');
         }
     }
-}
+

@@ -23,9 +23,6 @@
     <link rel="manifest" href="/assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
-
-
-
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
