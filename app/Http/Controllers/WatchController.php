@@ -25,19 +25,14 @@ class WatchController extends Controller
         'description' => 'nullable|string',
         'price' => 'required|numeric|min:0',
         'stock' => 'required|integer|min:0',
-        'imageOne' => 'nullable|image|max:51200',
+        'imageOne' => 'nullable|image',
     ]);
 
     $imageUrl = null;
 
     if ($request->hasFile('imageOne')) {
-        // Store the image in the public/images directory
         $imagePath = $request->file('imageOne')->store('images', 'public');
-
-        // Generate the correct URL for the stored image
         $imageUrl = Storage::url($imagePath);
-
-        // Get the full path to the image file on the server
         $fullPath = storage_path('app/public/' . $imagePath);
     }
 
