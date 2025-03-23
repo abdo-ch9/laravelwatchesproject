@@ -25,9 +25,9 @@ class WatchController extends Controller
         'description' => 'nullable|string',
         'price' => 'required|numeric|min:0',  // Ensure price is provided and is a positive number
         'stock' => 'required|integer|min:0',  // Ensure stock is a positive integer
-        'imageOne' => 'nullable|image|max:2048',
-        'imageTwo' => 'nullable|image|max:2048', // Ensure image is a valid file if provided
-        'imageTree' => 'nullable|image|max:2048',
+        'imageOne' => 'nullable|image|max:51200',
+        'imageTwo' => 'nullable|image|max:51200', // Ensure image is a valid file if provided
+        'imageTree' => 'nullable|image|max:51200',
     ]);
 
     // Handle the image upload
