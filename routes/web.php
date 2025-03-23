@@ -33,12 +33,12 @@ Route::post('/watches', [WatchController::class, 'store'])->name('watches.store'
 Route::get('/watches/{id}', [WatchController::class, 'show'])->name('watches.show'); // Show a specific watch
 Route::get('/watches/{id}/edit', [WatchController::class, 'edit'])->name('watches.edit')->middleware(adminUser::class); // Edit a product by ID
 Route::put('/watches/{id}', [WatchController::class, 'update'])->name('watches.update')->middleware(adminUser::class); // Update product by ID
-Route::delete('/watches/{id}', [WatchController::class, 'destroy'])->name('watches.destroy')->middleware(adminUser::class); // Delete product by ID
+Route::delete('/watches/{id}/destroy', [WatchController::class, 'destroy'])->name('watches.destroy')->middleware(adminUser::class); // Delete product by ID
 
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
 Route::post('/contact/submit', [ContatController::class, 'submit'])->name('contact.submit');
-URL::forceScheme("https");
+//URL::forceScheme("https");
 ?>

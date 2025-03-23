@@ -82,15 +82,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="imageOne" class="form-label">Image 1</label>
-                    <input type="file" class="form-control" id="imageOne" name="imageOne" accept="image/*">
+                    <input type="file" class="form-control" id="imageOne" name="imageOne" >
                 </div>
                 <div class="mb-3">
                     <label for="imageTwo" class="form-label">Image 2</label>
-                    <input type="file" class="form-control" id="imageTwo" name="imageTwo" accept="image/*">
+                    <input type="file" class="form-control" id="imageTwo" name="imageTwo" >
                 </div>
                 <div class="mb-3">
                     <label for="imageTree" class="form-label">Image 3</label>
-                    <input type="file" class="form-control" id="imageTree" name="imageTree" accept="image/*">
+                    <input type="file" class="form-control" id="imageTree" name="imageTree">
                 </div>
                 <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-success">Save</button>

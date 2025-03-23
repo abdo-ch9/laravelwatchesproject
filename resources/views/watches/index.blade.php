@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>velux watch Ecommerce</title>
-    <link href="assets/css/theme.css" rel="stylesheet" />
+    <link href="/assets/css/theme.css" rel="stylesheet" />
     <style>
         /* Card styling */
         .card {
@@ -67,14 +67,14 @@
                             <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                         </svg></a>
                     <div class="ms-4 text-light fw-bold" style="margin-top: 10px;">+212 6 25-02-52-26 </div>
-              </form>
+                </form>
                 @if(Auth::check())
                 <li class="nav-item px-5 nav-link fw-bold" style="padding-top: 50px;">
                     <span>bonjour</span>
                     <a class="nav-link fw-bold" href="" style="color: white; display: inline; ">{{ Auth::user()->name }}</a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-outline-primary" style="display: inline; margin-left: 50px; margin-top:5px;"  >Logout</button>
+                        <button type="submit" class="btn btn-outline-primary" style="display: inline; margin-left: 50px; margin-top:5px;">Logout</button>
                     </form>
                 </li>
                 @else
@@ -96,11 +96,13 @@
             @foreach($watches as $watch)
             <div class="col-md-3 col-sm-6 mb-4 d-flex">
                 <div class="card">
-                    <img src="{{ $watch->image ? asset($watch->image) : 'https://via.placeholder.com/300x200?text=No+Image' }}" alt="Watch Image">
+                    <img src="{{ asset('storage/images/' . $watch->imageOne) }}" alt="Watch Image 1">
                     <div class="card-body">
                         <h5 class="card-title">{{ $watch->name }}</h5>
                         <div class="price-container" style="display: flex; align-items: center; justify-content: center;">
-                            <p class="card-text" style="text-decoration: line-through; color: #999; font-size: 0.9rem; margin-right: 5px;">349 DH</p>
+                            @if($watch->previous_price)
+                            <p class="card-text" style="text-decoration: line-through; color: #999; font-size: 0.9rem; margin-right: 5px;">{{ number_format($watch->previous_price, 2) }} DH</p>
+                            @endif
                             <p class="card-text" style="font-size: 1rem; padding-bottom: 18px;">{{ number_format($watch->price, 2) }} DH</p>
                         </div>
                         <div class="btn-actions">
