@@ -40,5 +40,5 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::post('/contact/submit', [ContatController::class, 'submit'])->name('contact.submit');
-//URL::forceScheme("https");
+URL::forceScheme("https");
 ?>
