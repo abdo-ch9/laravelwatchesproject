@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContatController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WatchController;
 use App\Http\Middleware\adminUser;
@@ -40,6 +41,6 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact.submit');
+Route::post('/contact/submit', [ContatController::class, 'submit'])->name('contact.submit');
 
 ?>
