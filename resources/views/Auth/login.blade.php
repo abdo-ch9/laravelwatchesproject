@@ -25,6 +25,8 @@
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link href="assets/css/theme.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/Auth.css">
+
 </head>
 
 <body>

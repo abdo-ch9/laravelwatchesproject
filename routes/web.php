@@ -8,9 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WatchController;
 use App\Http\Middleware\adminUser;
 use App\Http\Middleware\islogged;
-
-
-
+use Illuminate\Support\Facades\URL;
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,5 +40,5 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::post('/contact/submit', [ContatController::class, 'submit'])->name('contact.submit');
-
+URL::forceScheme("https");
 ?>
