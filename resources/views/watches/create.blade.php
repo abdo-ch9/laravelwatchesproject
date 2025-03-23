@@ -82,11 +82,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="imageOne" class="form-label">Image 1</label>
-                    <input type="file" class="form-control" id="imageOne" name="imageOne" >
+                    <input type="file" class="form-control" id="imageOne" name="imageOne">
                 </div>
                 <div class="mb-3">
                     <label for="imageTwo" class="form-label">Image 2</label>
-                    <input type="file" class="form-control" id="imageTwo" name="imageTwo" >
+                    <input type="file" class="form-control" id="imageTwo" name="imageTwo">
                 </div>
                 <div class="mb-3">
                     <label for="imageTree" class="form-label">Image 3</label>
@@ -101,6 +101,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
+<script src="vendors/bootstrap/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </html>

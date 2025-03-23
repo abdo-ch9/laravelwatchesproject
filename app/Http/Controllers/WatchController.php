@@ -20,47 +20,48 @@ class WatchController extends Controller
     }
     public function store(Request $request)
     {
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'price' => 'required|numeric|min:0',
-        'stock' => 'required|integer|min:0',
-        'imageOne' => 'nullable|image',
-        'imageTwo' => 'nullable|image',
-        'imageTree' => 'nullable|image',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'imageOne' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'imageTwo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'imageTree' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    ]);
+        // Initialize image URLs as null
+        $imageUrlOne = null;
+        $imageUrlTwo = null;
+        $imageUrlTree = null;
 
-    $imageUrl = null;
+        // Store images if uploaded
+        if ($request->hasFile('imageOne')) {
+            $imagePath = $request->file('imageOne')->store('images', 'public');
+            $imageUrlOne = Storage::url($imagePath);
+        }
+        if ($request->hasFile('imageTwo')) {
+            $imagePath = $request->file('imageTwo')->store('images', 'public');
+            $imageUrlTwo = Storage::url($imagePath);
+        }
+        if ($request->hasFile('imageTree')) {
+            $imagePath = $request->file('imageTree')->store('images', 'public');
+            $imageUrlTree = Storage::url($imagePath);
+        }
 
-    if ($request->hasFile('imageOne')) {
-        $imagePath = $request->file('imageOne')->store('images', 'public');
-        $imageUrlOne = Storage::url($imagePath);
-        $fullPath = storage_path('app/public/images' . $imagePath);
-    }
-    if ($request->hasFile('imageTwo')) {
-        $imagePath = $request->file('imageTwo')->store('images', 'public');
-        $imageUrlTwo = Storage::url($imagePath);
-        $fullPath = storage_path('app/public/images' . $imagePath);
-    }
-    if ($request->hasFile('imageTree')) {
-        $imagePath = $request->file('imageTree')->store('images', 'public');
-        $imageUrlTree = Storage::url($imagePath);
-        $fullPath = storage_path('app/public/images' . $imagePath);
-    }
+        // Create a new watch record
+        $watch = Watch::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'imageOne' => $imageUrlOne,
+            'imageTwo' => $imageUrlTwo,
+            'imageTree' => $imageUrlTree,
+        ]);
 
-    // Create a new watch record
-    $watch = Watch::create(array_merge(
-        $request->only(['name', 'description', 'price', 'stock']),
-        ['imageOne' => $imageUrlOne ],
-        ['imageTwo' => $imageUrlTwo ],
-        ['imageTree' => $imageUrlTree ]
-    ));
-
-        // Redirect to the watches index page with a success message
         return redirect()->route('watches.index')->with('success', 'Watch added successfully!');
     }
-
 
     public function show($id)
     {
@@ -91,28 +92,27 @@ class WatchController extends Controller
         if ($request->hasFile('imageOne')) {
             $imagePathOne = $request->file('imageOne')->store('images', 'public');
             $watch->image_one = Storage::url($imagePathOne);
-        
-        if ($request->hasFile('imageTwo')) {
-            $imagePathTwo = $request->file('imageTwo')->store('images', 'public');
-            $watch->image_two = Storage::url($imagePathTwo);
-        }
-        if ($request->hasFile('imageTree')) {
-            $imagePathThree = $request->file('imageTree')->store('images', 'public');
-            $watch->image_three = Storage::url($imagePathThree);
-        }
 
-        // Update the watch record
-        $watch->update($request->only(['name', 'description', 'price', 'stock']));
+            if ($request->hasFile('imageTwo')) {
+                $imagePathTwo = $request->file('imageTwo')->store('images', 'public');
+                $watch->image_two = Storage::url($imagePathTwo);
+            }
+            if ($request->hasFile('imageTree')) {
+                $imagePathThree = $request->file('imageTree')->store('images', 'public');
+                $watch->image_three = Storage::url($imagePathThree);
+            }
 
-        // Redirect to the watches index page with a success message
-        return redirect()->route('watches.index')->with('success', 'Watch updated successfully!');
-    }
+            // Update the watch record
+            $watch->update($request->only(['name', 'description', 'price', 'stock']));
+
+            // Redirect to the watches index page with a success message
+            return redirect()->route('watches.index')->with('success', 'Watch updated successfully!');
+        }
     }
     public function destroy(Request $request, $id)
     {
-            $watch = Watch::findOrFail($id);
-            $watch->delete();
-            return redirect()->route('watches.index')->with('success', 'Watch deleted successfully!');
-        }
+        $watch = Watch::findOrFail($id);
+        $watch->delete();
+        return redirect()->route('watches.index')->with('success', 'Watch deleted successfully!');
     }
-
+}

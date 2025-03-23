@@ -57,7 +57,7 @@
                 @endif
 
                 <form action="{{ route('contact.submit') }}" method="POST" enctype="multipart/form-data">
-                    
+
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -83,5 +83,8 @@
         </section>
     </main>
 </body>
+<script src="vendors/bootstrap/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </html>
