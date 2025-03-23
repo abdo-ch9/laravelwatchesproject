@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind('path.public', function () {
-            return realpath(base_path() . '/../public_html');
+            return realpath(base_path() . '/../public');
         });
     }
 
@@ -21,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Example of bootstrapping a service
+        // $this->app['view']->composer('view.name', function ($view) {
+        //     $view->with('key', 'value');
+        // });
     }
 }
