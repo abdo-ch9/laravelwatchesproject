@@ -12,5 +12,6 @@ class watch extends Model
     
     protected $table = 'watches';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'description', 'price', 'stock', 'image'];
+    protected $fillable = ['name', 'description', 'price', 'stock', 'imageOne', 'imageTwo', 'imageTree'];
+    public $timestamps = false;
 }

@@ -18,6 +18,7 @@ class WatchController extends Controller
     {
         return view("watches.create"); // Updated to remove unnecessary variable
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -25,9 +26,9 @@ class WatchController extends Controller
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
-            'imageOne' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'imageTwo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'imageTree' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'imageOne' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:102400', // 100MB
+            'imageTwo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:102400',
+            'imageTree' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:102400',
         ]);
 
         // Initialize image URLs as null
@@ -38,7 +39,7 @@ class WatchController extends Controller
         // Store images if uploaded
         if ($request->hasFile('imageOne')) {
             $imagePath = $request->file('imageOne')->store('images', 'public');
-            $imageUrlOne = Storage::url($imagePath);
+            $imageUrlOne = Storage::url($imagePath); // Generates a URL like /storage/images/filename.jpg
         }
         if ($request->hasFile('imageTwo')) {
             $imagePath = $request->file('imageTwo')->store('images', 'public');
